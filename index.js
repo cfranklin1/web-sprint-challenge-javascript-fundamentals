@@ -30,13 +30,16 @@ For example, `summation(4)` should return 10 because 1+2+3+4 is 10. Note, you ma
 
 function summation(num) {
   let sum = 0;
+  let number = 0;
   //num = num.toString().split('').map(Number);
   for(let i = 0; i < num; i++){
-      sum += num;
+      number += 1;
+      sum += number;
   }
   return sum;
   }
-console.log(summation(4)); 
+//console.log(summation(4)); 
+//console.log(summation(10)); 
 
 // 🦁🦁🦁 Topic 2: ADVANCED Array Methods 🦁🦁🦁
 // Given this zoo data from around the United States, follow the instructions below. Use the specific array methods in the requests below to solve the problems.
@@ -59,10 +62,10 @@ const zooAnimals = [
   Use animalNames to populate and return the displayNames array with only the animal name and scientific name of each animal. 
   displayNames will be an array of strings, and each string should follow this pattern: "name: {name}, scientific: {scientific name}"
   */
-
-  function animalNames(){
-    const displayNames = zooAnimals.forEach(function(item){
-      return (`name: ${item.animal_name}, scientific: ${item.scientific_name}`);
+  function animalNames(zooAnimals){
+    const displayNames = [];
+    zooAnimals.forEach(function(item){
+      displayNames.push(`name: ${item.animal_name}, scientific: ${item.scientific_name}`);
       
     });
   return displayNames;
@@ -103,10 +106,16 @@ const zooAnimals = [
   Remember the reduce method takes two arguments: a callback (which itself takes two args - the accumulator and the item), and an initial value for the count.
   */
 
-  function USApop(/*Your Code Here*/){
-    const USApop = zooAnimals.reduce(function(accum, item){
+  function USApop(zooAnimals){
+    const totalPop = [];
+    const population = zooAnimals.filter(function(item){
+       totalPop.push(item.population);
+    });
 
-    }, initialValue);
+    const totals = totalPop.reduce(function(total, item){
+      return total + item
+    });
+    return totals;
   }
   
   
@@ -184,7 +193,7 @@ CuboidMaker.prototype.volume = function(){
   Formula for cuboid surface area of a cube: 
   2 * (length * width + length * height + width * height)  */
 CuboidMaker.prototype.surfaceArea = function(){
-  const surface = this.length * this.width + this.length * this.height + this.width * this.height;
+  const surface = 2 * (this.length * this.width + this.length * this.height + this.width * this.height);
   return surface;
 }
 
@@ -215,7 +224,7 @@ class CuboidMakerTwo{
     return this.length * this.width * this.height;
   }
   surfaceArea(){
-    return this.length * this.width + this.length * this.height + this.width * this.height;
+    return 2 * (this.length * this.width + this.length * this.height + this.width * this.height);
   }
     
 }
